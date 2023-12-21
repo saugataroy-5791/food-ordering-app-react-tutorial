@@ -1,0 +1,29 @@
+{
+   "name": "food_ordering_app",
+   "version": "1.0.0",
+   "description": "Learning React from Namaste React tutorial series.",
+   "scripts": {
+      "start": "npx parcel index.html",
+      "build": "npx build index.html",
+      "test": "jest"
+   },
+   "keywords": [
+      "React",
+      "ReactDOM",
+      "Redux"
+   ],
+   "author": "Saugata Roy",
+   "license": "ISC",
+   "devDependencies": {
+      "parcel": "^2.9.3",
+      "process": "^0.11.10"
+   },
+   "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-router-dom": "^6.21.0"
+   },
+   "browserslist": [
+      "last 2 versions"
+   ]
+}
