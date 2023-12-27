@@ -1,59 +1,45 @@
-import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ShimmerRestaurantMenu from "./ShimmerRestaurantMenu";
+import ShimmerRestaurantMenu from "../shimmer/ShimmerRestaurantMenu";
 import RestaurantMenuSubItem from "./RestaurantMenuSubItem";
-import { BASE_URL, GET_RESTAURANT_MENU_PARAMS, TAIL_URL } from "../utils/constants";
+import useRestaurantMenu from "../utils/hooks/useRestaurantMenu";
+import Accordion from "./Accordion";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
-   const [restaurantData, setRestaurantData] = useState(null);
    const { resDetails } = useParams();
    const navigateBackToHome = useNavigate();
-
-   useEffect(() => {
-      fetchData();
-   }, []);
-
-   const fetchData = async () => {
-      // const resName = "imperial-restaurant-since-1954";
-      // const resLocation = "residency-road-bangalore";
-      try {
-         const fetchUrl = BASE_URL + resDetails + GET_RESTAURANT_MENU_PARAMS + TAIL_URL;
-         const data = await fetch(fetchUrl);
-         const jsonData = await data.json();
-         setRestaurantData(jsonData?.page_data)
-      } catch (error) {
-         console.log(error);
-      }
-   }
+   const restaurantData = useRestaurantMenu(resDetails);
+   const [showIndex, setShowIndex] = useState(0);
 
    const onBackToHomeClicked = () => {
       navigateBackToHome("/", { replace: true });
    }
 
    return restaurantData === null ? <ShimmerRestaurantMenu /> : (
-      <div className="restaurant-menu">
-         <button type="button" className="back-home-btn" onClick={onBackToHomeClicked}>Back to Home</button>
-         <h2 className="restaurant-menu-name">{restaurantData?.sections?.SECTION_BASIC_INFO?.name}</h2>
-         <p className="cuisine">{restaurantData?.sections?.SECTION_BASIC_INFO?.cuisine_string}</p>
-         <p className="location">{restaurantData?.sections?.SECTION_RES_CONTACT?.locality_verbose}</p>
-         <p className="timing">{restaurantData?.sections?.SECTION_BASIC_INFO?.timing?.customised_timings?.opening_hours[0].days} : {restaurantData?.sections?.SECTION_BASIC_INFO?.timing?.customised_timings?.opening_hours[0].timing}</p>
-         <h3 className="restaurant-menu-title">Menu</h3>
-
-         <div className="menu-list">
-            {restaurantData?.order?.menuList?.menus.map((menuList) => {
-               return <div className="menulist-container" key={menuList?.menu?.id}>
-                  <p className="menulist-name">{menuList?.menu?.name} ({menuList?.menu?.categories?.length})</p>
-                  {menuList?.menu?.categories.map((menuItem) => {
-                     return <div className="menuitem-container" key={menuItem?.category?.id}>
-                        <p className="menuitem-name">{menuItem?.category?.name}</p>
-                        <div className="menusubitem-container">
-                           {menuItem?.category?.items.map((menuSubItem) => {
-                              return <RestaurantMenuSubItem key={menuSubItem?.item?.id} menuSubItemData={menuSubItem} />
-                           })}
-                        </div>
-                     </div>
-                  })}
-               </div>
+      <div className="min-h-[450px] restaurant-menu p-4">
+         <button type="button" className="back-home-btn w-full bg-green-500 hover:bg-green-700 text-white p-2 mb-4 font-bold rounded" onClick={onBackToHomeClicked}>Back to Home</button>
+         <div className="w-full flex justify-between">
+            <div className="restaurant-menu-primary-details">
+               <h2 className="restaurant-menu-name text-2xl font-bold mb-2">{restaurantData?.sections?.SECTION_BASIC_INFO?.name}</h2>
+               <p className="cuisine text-base font-medium mb-2">{restaurantData?.sections?.SECTION_BASIC_INFO?.cuisine_string}</p>
+            </div>
+            <div className="restaurant-menu-secondary-details">
+               <p className="location text-2xl font-bold mb-2">{restaurantData?.sections?.SECTION_RES_CONTACT?.locality_verbose}</p>
+               <p className="timing text-base font-medium mb-2">{restaurantData?.sections?.SECTION_BASIC_INFO?.timing?.customised_timings?.opening_hours[0].days} : {restaurantData?.sections?.SECTION_BASIC_INFO?.timing?.customised_timings?.opening_hours[0].timing}</p>
+            </div>
+         </div>
+         <hr />
+         <h3 className="restaurant-menu-title text-xl font-semibold mb-4 underline">Menu</h3>
+         <div className="menu-list w-[70%] my-3 mx-auto flex flex-col justify-between items-center">
+            {restaurantData?.order?.menuList?.menus.map((menuList, index) => {
+               return (
+                  <Accordion
+                     key={menuList?.menu?.id}
+                     menuList={menuList}
+                     showAccordion={index === showIndex ? true : false}
+                     updateShowIndex={() => setShowIndex(index)}
+                  />
+               )
             })}
          </div>
       </div >

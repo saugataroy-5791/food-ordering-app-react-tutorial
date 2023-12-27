@@ -1,12 +1,11 @@
-import { useState } from "react";
 
 const Search = (props) => {
    const { searchText, onSearchTextChanged, onSearchButtonClicked } = props;
 
    return (
       <div className="search">
-         <input type="text" id="search" value={searchText} className="search-box" placeholder="Search..." onChange={onSearchTextChanged} />
-         <button type="button" className="search-button" onClick={onSearchButtonClicked}>Search</button>
+         <input type="text" id="search" value={searchText} className="search-box border rounded border-black py-2 px-4 mr-4 text-sm" placeholder="Search..." onChange={onSearchTextChanged} />
+         <button type="button" className="search-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={onSearchButtonClicked}>Search</button>
       </div>
    )
 }

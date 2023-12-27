@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { PromotedRestaurantCard, PromotedRestaurantCard } from "./RestaurantCard";
 import Search from "./Search";
 import { BASE_URL, GET_RESTAURANTS_PARAMS, TAIL_URL } from "../utils/constants";
-import ShimmerRestaurantCard from "./ShimmerRestaurantCard";
+import ShimmerRestaurantCard from "../shimmer/ShimmerRestaurantCard";
+import Filter from "./Filter";
+import { Link } from "react-router-dom";
 
 const Body = () => {
    const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -52,16 +54,23 @@ const Body = () => {
       }
    }
 
+   const RestaurantCardPromoted = PromotedRestaurantCard(RestaurantCard);
+
    return listOfRestaurants.length === 0 ? (<ShimmerRestaurantCard />) : (
-      <div className="body">
-         <Search searchText={searchText} onSearchTextChanged={onSearchTextChanged} onSearchButtonClicked={onSearchButtonClicked} />
-         <div className="filter">
-            <button type="button" onClick={onTopRatedBtnClicked}>Top rated restaurants</button>
-            <button type="button" onClick={onResetBtnClicked}>Reset</button>
+      <div className="body min-h-[450px] flex flex-wrap flex-col p-4">
+         <div className="top-container flex mb-3 ">
+            <Search searchText={searchText} onSearchTextChanged={onSearchTextChanged} onSearchButtonClicked={onSearchButtonClicked} />
+            <Filter onTopRatedBtnClicked={onTopRatedBtnClicked} onResetBtnClicked={onResetBtnClicked} />
          </div>
-         <div className="restaurants">
+         <div className="restaurants flex flex-wrap">
             {filteredRestaurants.map((restaurant) => (
-               <RestaurantCard key={restaurant?.info?.resId} resData={restaurant} />
+               <Link to={"/restaurant/" + restaurant?.cardAction?.clickUrl?.split("/")[2]} key={restaurant?.info?.resId} className="no-underline">
+                  {
+                     restaurant?.isPromoted ?
+                        <RestaurantCardPromoted resData={restaurant} /> :
+                        <RestaurantCard resData={restaurant} />
+                  }
+               </Link>
             ))}
          </div>
       </div>

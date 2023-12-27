@@ -6,11 +6,23 @@ const RestaurantMenuSubItem = (props) => {
    const { item_image_thumb_url, fb_slug, name, price, desc } = item;
 
    return (
-      <div className="restaurant-menu-subitem">
-         <div className="subitem-card">
-            <div className="image"><img src={item_image_thumb_url ? item_image_thumb_url : LOGO_URL} alt={fb_slug} /></div>
-            <div className="content-text">
-               <p className="heading">{name}</p>
+      // <div className="restaurant-menu-subitem flex flex-col w-6/12">
+      //    <div className="subitem-card flex justify-start pr-3 pt-3 pb-4">
+      //       <div className="image w-3/12 mr-4"><img className="w-full h-auto rounded-md" src={item_image_thumb_url ? item_image_thumb_url : LOGO_URL} alt={fb_slug} /></div>
+      //       <div className="content-text w-9/12 flex flex-col justify-start">
+      //          <p className="heading font-medium">{name}</p>
+      //          <p className="price">Rs.{price}</p>
+      //          <p className="description">{desc}</p>
+      //       </div>
+      //    </div>
+      // </div>
+
+
+      <div className="restaurant-menu-subitem flex flex-col w-6/12">
+         <div className="subitem-card flex justify-start pr-3 pt-3 pb-4">
+            <div className="image w-3/12 mr-4"><img className="w-full h-auto rounded-md" src={item_image_thumb_url ? item_image_thumb_url : LOGO_URL} alt={fb_slug} /></div>
+            <div className="content-text w-9/12 flex flex-col justify-start">
+               <p className="heading font-medium">{name}</p>
                <p className="price">Rs.{price}</p>
                <p className="description">{desc}</p>
             </div>
