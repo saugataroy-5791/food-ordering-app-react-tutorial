@@ -8,7 +8,7 @@ const ErrorPage = () => {
       navigateBackToHome("/", { replace: true });
    }
    return (
-      <div className="error min-h-[450px] p-4">
+      <div className="error min-h-[550px] p-4">
          <h2 className="text-2xl font-bold mb-5"><span>{err?.status}</span> - <span>{err?.statusText}</span></h2>
          <h3 className="mb-10">{err?.data}</h3>
          <hr className="mb-10" />

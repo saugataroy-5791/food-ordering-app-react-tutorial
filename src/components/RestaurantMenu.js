@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ShimmerRestaurantMenu from "../shimmer/ShimmerRestaurantMenu";
 import RestaurantMenuSubItem from "./RestaurantMenuSubItem";
 import useRestaurantMenu from "../utils/hooks/useRestaurantMenu";
-import Accordion from "./Accordion";
+import RestaurantMenuAccordion from "./RestaurantMenuAccordion";
 import { useState } from "react";
 
 const RestaurantMenu = () => {
@@ -16,7 +16,7 @@ const RestaurantMenu = () => {
    }
 
    return restaurantData === null ? <ShimmerRestaurantMenu /> : (
-      <div className="min-h-[450px] restaurant-menu p-4">
+      <div className="min-h-[550px] restaurant-menu p-4">
          <button type="button" className="back-home-btn w-full bg-green-500 hover:bg-green-700 text-white p-2 mb-4 font-bold rounded" onClick={onBackToHomeClicked}>Back to Home</button>
          <div className="w-full flex justify-between">
             <div className="restaurant-menu-primary-details">
@@ -33,7 +33,7 @@ const RestaurantMenu = () => {
          <div className="menu-list w-[70%] my-3 mx-auto flex flex-col justify-between items-center">
             {restaurantData?.order?.menuList?.menus.map((menuList, index) => {
                return (
-                  <Accordion
+                  <RestaurantMenuAccordion
                      key={menuList?.menu?.id}
                      menuList={menuList}
                      showAccordion={index === showIndex ? true : false}

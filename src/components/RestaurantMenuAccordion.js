@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantMenuSubItem from "./RestaurantMenuSubItem";
 
 
-const Accordion = (props) => {
+const RestaurantMenuAccordion = (props) => {
    const { menuList, showAccordion, updateShowIndex } = props;
 
    const toggleArrow = () => {
@@ -18,7 +18,7 @@ const Accordion = (props) => {
    }
 
    return (
-      <div className=" w-full accordion flex flex-col justify-between bg-gray-200 rounded p-4 my-2 cursor-pointer shadow-lg" onClick={toggleArrow}>
+      <div className="restaurant-menu-accordion w-full flex flex-col justify-between bg-gray-200 rounded p-4 my-2 cursor-pointer shadow-lg" onClick={toggleArrow}>
          <div className="flex justify-between items-center">
             <div className="text font-semibold">{menuList?.menu?.name} ({calculateTotalNumberOfItems(menuList?.menu?.categories)})</div>
             <div className="icon text-lg">{!showAccordion ? <span>&darr;</span> : <span>&uarr;</span>}</div>
@@ -42,4 +42,4 @@ const Accordion = (props) => {
    )
 }
 
-export default Accordion;
+export default RestaurantMenuAccordion;

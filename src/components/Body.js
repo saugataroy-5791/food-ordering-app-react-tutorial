@@ -57,7 +57,7 @@ const Body = () => {
    const RestaurantCardPromoted = PromotedRestaurantCard(RestaurantCard);
 
    return listOfRestaurants.length === 0 ? (<ShimmerRestaurantCard />) : (
-      <div className="body min-h-[450px] flex flex-wrap flex-col p-4">
+      <div className="body min-h-[550px] flex flex-wrap flex-col p-4">
          <div className="top-container flex mb-3 ">
             <Search searchText={searchText} onSearchTextChanged={onSearchTextChanged} onSearchButtonClicked={onSearchButtonClicked} />
             <Filter onTopRatedBtnClicked={onTopRatedBtnClicked} onResetBtnClicked={onResetBtnClicked} />
