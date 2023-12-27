@@ -1,12 +1,16 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/context/UserContext";
 
 const Header = () => {
 	const [btnName, setBtnName] = useState("Login");
+	const { isLoggedIn, changeLoggedInUser, changeLogInStatus } = useContext(UserContext);
 
 	const onLoginClicked = () => {
 		btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
+		changeLogInStatus(!isLoggedIn);
+		changeLoggedInUser("Saugata Roy");
 	}
 
 	const onRefreshClicked = () => {

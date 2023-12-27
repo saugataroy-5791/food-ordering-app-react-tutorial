@@ -1,13 +1,13 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import About from "./components/About";
 import Contact from "./components/Contact";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import RestaurantMenu from "./components/RestaurantMenu";
+import { UserProvider } from "./utils/context/UserContext";
 
 /**
  * JSX
@@ -24,14 +24,17 @@ const HeadingComponent = () => {
 	);
 };
 
-const Grocery = lazy(() => import("./components/Grocery"))
+const Grocery = lazy(() => import("./components/Grocery"));
+const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
 	return (
 		<div className="applayout">
-			<Header />
-			<Outlet />
-			<Footer />
+			<UserProvider>
+				<Header />
+				<Outlet />
+				<Footer />
+			</UserProvider>
 		</div>
 	);
 };
@@ -47,7 +50,7 @@ const appRouter = createBrowserRouter([
 			},
 			{
 				path: "/about",
-				element: <About />
+				element: <Suspense fallback={<h4>loading...</h4>}><About /></Suspense>
 			},
 			{
 				path: "/contact",
