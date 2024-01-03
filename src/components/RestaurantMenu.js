@@ -12,6 +12,7 @@ const RestaurantMenu = () => {
 	const restaurantData = useRestaurantMenu(resDetails);
 	useDocumentTitle(restaurantData?.sections?.SECTION_BASIC_INFO?.name);
 	const [showIndex, setShowIndex] = useState(0);
+	const [toggleAccordion, setToggleAccordion] = useState(false);
 
 	const onBackToHomeClicked = () => {
 		navigateBackToHome("/", { replace: true });
@@ -38,8 +39,9 @@ const RestaurantMenu = () => {
 						<RestaurantMenuAccordion
 							key={menuList?.menu?.id}
 							menuList={menuList}
-							showAccordion={index === showIndex ? true : false}
+							showAccordion={(index === showIndex && toggleAccordion) ? true : false}
 							updateShowIndex={() => setShowIndex(index)}
+							updateToggleAccordion = {() => setToggleAccordion(index === showIndex ? !toggleAccordion : toggleAccordion === true ? toggleAccordion : !toggleAccordion)}
 						/>
 					)
 				})}

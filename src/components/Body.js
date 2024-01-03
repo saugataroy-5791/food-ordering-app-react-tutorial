@@ -52,7 +52,7 @@ const Body = () => {
 				return restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
 			});
 			setSearchText("");
-			setFilteredRestaurants(searchData);
+			setFilteredRestaurants(searchData.length > 0 ? searchData : []);
 		} else {
 			return false;
 		}
@@ -70,7 +70,7 @@ const Body = () => {
 				{isLoggedIn && <div className="flex p-2 ml-5"><pre>Logged in User: {loggedInUser}</pre></div>}
 			</div>
 			<div className="restaurants flex flex-wrap">
-				{filteredRestaurants.map((restaurant) => (
+				{filteredRestaurants.length > 0 ? filteredRestaurants.map((restaurant) => (
 					<Link to={"/restaurant/" + restaurant?.cardAction?.clickUrl?.split("/")[2]} key={restaurant?.info?.resId} className="no-underline">
 						{
 							restaurant?.isPromoted ?
@@ -78,7 +78,7 @@ const Body = () => {
 								<RestaurantCard resData={restaurant} />
 						}
 					</Link>
-				))}
+				)) : <h2 className="w-full text-bold text-center text-xl p-4 m-4">Restaurant not found. Please search other restaurant.</h2>}
 			</div>
 		</div>
 	);

@@ -92,12 +92,48 @@
 -  whenever state variable changes, React will re-render the component and the updated value would be rendered
 
 ### Findinig the path
+-	Routing configuration in App.js file
+-	createBrowserRouter will create the routing configuration
+-	We need to provide the routing configuration to our app using RouterProvider
+-	react router dom gives us a special hook, useRouterError to capture routing error
+- 	Outlet is a tunnel render child routes
+-	Navigate to a new page without reloading the whole page using Link 
+-	Two types of routing: client side and server side routing
+-	useParams to capture route params data
 
--  Routing configuration in App.js file
--  createBrowserRouter will create the routing configuration
--  We need to provide the routing configuration to our app using RouterProvider
--  react router dom gives us a special hook, useRouterError to capture routing error
--       Outlet is a tunnel render child routes
--  Navigate to a new page without reloading the whole page using Link
--  Two types of routing: client side and server side routing
--  useParams to capture route params data
+### Optimising our app
+-	single responsibility - resuable, maintainable, testable
+-	hooks are normal functions, helper functions
+-	chunking, code splitting, lazy loading, dynamic bundling
+-	logical separations of bundles - should have enough code for a feature
+-	lazy() is used to lazily load component
+-	Suspense is a component from React to wrap our component to lazily load, should have a fallback until the component loads
+
+### Jo dikhta hain, vo biukta hain
+-	styles components
+-	Material UI, Bootstrap, Chakra UI, Tailwind CSS, Ant design
+-	Tailwind css iwth parcel
+-	PostCSS is a tool to transform  CSS with JS, Tailwind uses PostCSS
+-	Parcel will use postcssrc to use Tailwind
+
+### Data is the new oil
+-	Higher order component is a function that takes a component and returns a component
+-	HOC are pure functions
+-	controlled components are those where state and behaviour are managed or controlled by its parent component
+-	uncontrolled components are those where state and behaviour are managed or controlled by themselves
+-	uncontrolled to controlled is lifting the state update
+-	props drilling is passing props from parent to child to pass to a grandchildren and so on
+-	React has one way data flow, from top to bottom, parent to child
+-	The Context API consists of two main parts: the context provider and the context consumer
+-	to update data in context, context.provider is used
+-	we can nest context.provider
+
+### Let's build our store
+-	React-Redux, Redux Toolkit
+-	Redux store is a huge JS object and is accessible centrally globally
+-	It is like a client side database
+-	Slices are parts of Redux store, logical partitions
+-	On an event, an action is dispatched which calls a function
+-	The function is known as Reducer function
+-	Reducer function modifies the slice/data of Redux store
+-	Selector is used to read data from Redux and update the React compoenent also known as subscribing to store

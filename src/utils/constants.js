@@ -1,4 +1,5 @@
 export const LOGO_URL = "https://yeoldeorchard.com/wp-content/uploads/2020/04/5310366-uber-eats-logo-png-and-vector-logo-download-uber-eats-png-3500_3500_preview.png";
+export const CART_LOGO_URL = "https://static.vecteezy.com/system/resources/previews/019/787/018/original/shopping-cart-icon-shopping-basket-on-transparent-background-free-png.png";
 export const BASE_URL = "https://www.zomato.com/webroutes/getPage?page_url=/bangalore/";
 export const TAIL_URL = "&location=&isMobile=0";
 export const GET_RESTAURANTS_PARAMS = "restaurants?place_name=Bengaluru&dishv2_id=55280";
